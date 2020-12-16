@@ -1,0 +1,52 @@
+//font
+$primaryFont: 'Poppins', sans-serif;
+$fontSize: 12px;
+
+//colors
+$primaryColor:#2d343c;
+$primaryColorDark: #22272b;
+$secondaryColor: #ffc000;
+$secondaryColorDark: #ffb000;
+$backgroundColor: #e3e3e3;
+$whiteColor: #FFF;
+$blackColor: #000;
+
+
+
+.book {
+  
+  border: 1px solid $primaryColor;
+  border-radius: 16px;
+  padding: 12px;
+  margin:12px;
+
+  a {
+    text-decoration: none;
+  }
+
+  &_title {
+    color: $secondaryColorDark;
+
+    &:hover {
+      color: $secondaryColor;
+    }
+  }
+
+  &_author {
+    color: $blackColor;
+
+    &:hover {
+      color: $primaryColorDark;
+    }
+  } 
+
+  &_image {
+    &:hover {
+      box-shadow: 0 0 12px $blackColor;
+    }
+  }
+
+  &_text {
+    color: $blackColor;
+  }
+}

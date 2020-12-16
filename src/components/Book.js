@@ -4,12 +4,13 @@ import {Link} from 'react-router-dom';
 import Language from './Language';
 import LanguageList from './LanguageList';
 
+import '../scss/dist/book.css';
+
 const Book = ({author="Brak autora", book}) => {
 
   let langList;
-  let photoString = "http://covers.openlibrary.org/b/id/";
-  photoString += book.cover_i > 0 ? book.cover_i : 0;
-  photoString += "-M.jpg";
+  let photoString = book.cover_i ? "http://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg" : "http://via.placeholder.com/300x400";
+
 
   let publishYear = book.publish_year ? Math.min.apply(null, book.publish_year) : "Unknown";
   let authorString = book.author_name ? book.author_name : "Unknown";
@@ -24,18 +25,19 @@ const Book = ({author="Brak autora", book}) => {
       <Language key={lang} lang={lang}/>
     )) : langList = <Language key="nokey" lang="There is no informations"/>;
 
-  console.log(book);
+  
   return (
-    <div className="row mb-4">
+    <div className="row mb-4 book">
       <div className="col-md-4 col-lg-2">
-        <Link to={`book${book.key}/${publishYear}`}><img src={photoString} alt="" className="img-fluid"/></Link>
+        <Link to={`book${book.key}/${publishYear}`}><img src={photoString} alt="" className="img-fluid book_image"/></Link>
       </div>
       <div className="col-md-8 col-lg-10">
-        <h3 className="mb-2"><Link to={`book${book.key}/${publishYear}`}>{book.title}</Link></h3>
-        <Link to={`/author/authors/${authorId}`}><p className="p-0 m-0"><span className="font-weight-bold">Author:</span> {authorString}</p></Link>
-        <p className="p-0 m-0"><span className="font-weight-bold">Publish year:</span> {publishYear}</p>
-        <span className="p-0 font-weight-bold">Languages:</span>
+        <Link to={`book${book.key}/${publishYear}`}><h3 className="mb-2 book_title">{book.title}</h3></Link>
+        <Link to={`/author/authors/${authorId}`}><p className="p-0 m-0 book_author"><span className="font-weight-bold">Author:</span> {authorString}</p></Link>
+        <p className="p-0 m-0 book_text"><span className="font-weight-bold">Publish year:</span> {publishYear}</p>
+        <span className="p-0 book_text"><p className="font-weight-bold m-0">Avaiable language(s):</p>
         <LanguageList list={langList}></LanguageList>
+        </span>
       </div>
     </div>
   );

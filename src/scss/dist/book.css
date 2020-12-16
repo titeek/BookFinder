@@ -1,0 +1,27 @@
+.book {
+  border: 1px solid #2d343c;
+  border-radius: 16px;
+  padding: 12px;
+  margin: 12px;
+}
+.book a {
+  text-decoration: none;
+}
+.book_title {
+  color: #ffb000;
+}
+.book_title:hover {
+  color: #ffc000;
+}
+.book_author {
+  color: #000;
+}
+.book_author:hover {
+  color: #22272b;
+}
+.book_image:hover {
+  box-shadow: 0 0 12px #000;
+}
+.book_text {
+  color: #000;
+}
