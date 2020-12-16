@@ -24,8 +24,7 @@ class BookDetail extends React.Component {
     olApi.get(`${this.props.match.params.key}/${this.props.match.params.id}.json`)
     .then((response) => {
       this.setState({book: response.data});
-      console.log(response.data);
-      olApi.get(`${response.data.authors[0].author.key}.json`)
+        olApi.get(`${response.data.authors[0].author.key}.json`)
         .then((response) => {
           this.setState({author: response.data});
         });
