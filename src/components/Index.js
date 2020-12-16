@@ -9,10 +9,10 @@ import Book from './Book';
 
 import '../scss/dist/style.css';
 
-class SearchByTitle extends React.Component {
+class Index extends React.Component {
   constructor() {
     super();
-    this.state = {bookList: [], bookLoading: false, error: '', numberOfResults: 0, searchByTitleState: true};
+    this.state = {bookList: [], bookLoading: false, error: '', numberOfResults: 0, searchByTitleState: true, searchFailed: false};
     this.searchByTitle = this.searchByTitle.bind(this);
     this.searchByAuthor = this.searchByAuthor.bind(this);
   }
@@ -25,6 +25,9 @@ class SearchByTitle extends React.Component {
       params: {title: term}
     }).then((response) => {
       this.setState({bookList: response.data.docs, bookLoading: false, numberOfResults: response.data.numFound});
+      if(response.data.numFound === 0) {
+        this.setState({searchFailed: true});
+      }
     }).catch((error) => {
       this.setState({error: 'Failed to load books list!', bookLoading: false});
     });
@@ -67,18 +70,26 @@ class SearchByTitle extends React.Component {
         <Loader type="ThreeDots" color="#ffb000" height={50} width={120}timeout={999999} />
       </div>
     } else if(this.state.error) {
-      element = <div class="alert alert-danger customAlert" role="alert">
-      <h4 class="alert-heading">Something goes wrong!</h4>
+      element = <div className="alert alert-danger customAlert" role="alert">
+      <h4 className="alert-heading">Something goes wrong!</h4>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel corrupti necessitatibus cumque! Iste sint perspiciatis dolores quis doloremque quod. Possimus modi rerum debitis sed quaerat dolore delectus nesciunt quod iusto!</p>
       <hr/>
-      <p class="m-0">Error message:</p>
-      <p class="mb-0 font-weight-bold">{this.state.error}</p>
+      <p className="m-0">Error message:</p>
+      <p className="mb-0 font-weight-bold">{this.state.error}</p>
     </div>
-      
     } else if(this.state.bookList.length !== 0) {
       element = <div>
         <p className="d-flex justify-content-end">Number of results: {this.state.numberOfResults}</p>
         <BookList list={list}></BookList>
+      </div>
+    } else if(this.state.searchFailed){
+      element = 
+      <div className="alert alert-warning customAlert" role="alert">
+        <h4 className="alert-heading">No search results!</h4>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel corrupti necessitatibus cumque! Iste sint perspiciatis dolores quis doloremque quod. Possimus modi rerum debitis sed quaerat dolore delectus nesciunt quod iusto!</p>
+        <hr/>
+        <p className="m-0">Solution</p>
+        <p className="mb-0 font-weight-bold">Try one more time with another pharse into the finder.</p>
       </div>
     }
 
@@ -110,4 +121,4 @@ class SearchByTitle extends React.Component {
   }
 }
 
-export default SearchByTitle;
+export default Index;

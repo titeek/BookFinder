@@ -49,12 +49,12 @@ class BookDetail extends React.Component {
 
     if(this.state.error) {
       element = 
-      <div class="mt-3 alert alert-danger customAlert" role="alert">
-        <h4 class="alert-heading">Something goes wrong!</h4>
+      <div className="mt-3 alert alert-danger customAlert" role="alert">
+        <h4 className="alert-heading">Something goes wrong!</h4>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel corrupti necessitatibus cumque! Iste sint perspiciatis dolores quis doloremque quod. Possimus modi rerum debitis sed quaerat dolore delectus nesciunt quod iusto!</p>
         <hr/>
-        <p class="m-0">Error message:</p>
-        <p class="mb-0 font-weight-bold">{this.state.error}</p>
+        <p className="m-0">Error message:</p>
+        <p className="mb-0 font-weight-bold">{this.state.error}</p>
       </div>
     } else if(!this.state.author.name) {
       element = 
