@@ -9,7 +9,7 @@ import '../scss/dist/book.css';
 const Book = ({author="Brak autora", book}) => {
 
   let langList;
-  let photoString = book.cover_i ? "http://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg" : "http://via.placeholder.com/300x400";
+  let photoString = book.cover_i > 0 ? "http://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg" : "http://via.placeholder.com/300x400";
 
 
   let publishYear = book.publish_year ? Math.min.apply(null, book.publish_year) : "Unknown";
@@ -28,10 +28,10 @@ const Book = ({author="Brak autora", book}) => {
   
   return (
     <div className="row mb-4 book">
-      <div className="col-md-4 col-lg-2">
+      <div className="col-md-5 col-lg-3">
         <Link to={`book${book.key}/${publishYear}`}><img src={photoString} alt="" className="img-fluid book_image"/></Link>
       </div>
-      <div className="col-md-8 col-lg-10">
+      <div className="col-md-7 col-lg-9">
         <Link to={`book${book.key}/${publishYear}`}><h3 className="mb-2 book_title">{book.title}</h3></Link>
         <Link to={`/author/authors/${authorId}`}><p className="p-0 m-0 book_author"><span className="font-weight-bold">Author:</span> {authorString}</p></Link>
         <p className="p-0 m-0 book_text"><span className="font-weight-bold">Publish year:</span> {publishYear}</p>

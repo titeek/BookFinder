@@ -70,7 +70,7 @@ class SearchByTitle extends React.Component {
       element = <div className="alert alert-danger">{this.state.error}</div>
     } else if(this.state.bookList.length !== 0) {
       element = <div>
-        <p>Number of results: {this.state.numberOfResults}</p>
+        <p className="d-flex justify-content-end">Number of results: {this.state.numberOfResults}</p>
         <BookList list={list}></BookList>
       </div>
     }
