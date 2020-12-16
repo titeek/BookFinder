@@ -29,10 +29,10 @@ const Book = ({author="Brak autora", book}) => {
   return (
     <div className="row mb-4 book">
       <div className="col-md-5 col-lg-3">
-        <Link to={`book${book.key}/${publishYear}`}><img src={photoString} alt="" className="img-fluid book_image"/></Link>
+        <Link to={`/book${book.key}/${publishYear}`}><img src={photoString} alt="" className="img-fluid book_image"/></Link>
       </div>
       <div className="col-md-7 col-lg-9">
-        <Link to={`book${book.key}/${publishYear}`}><h3 className="mb-2 book_title">{book.title}</h3></Link>
+        <Link to={`/book${book.key}/${publishYear}`}><h3 className="mb-2 book_title">{book.title}</h3></Link>
         <Link to={`/author/authors/${authorId}`}><p className="p-0 m-0 book_author"><span className="font-weight-bold">Author:</span> {authorString}</p></Link>
         <p className="p-0 m-0 book_text"><span className="font-weight-bold">Publish year:</span> {publishYear}</p>
         <span className="p-0 book_text"><p className="font-weight-bold m-0">Avaiable language(s):</p>

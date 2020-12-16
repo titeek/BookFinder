@@ -1,27 +1,37 @@
 import React from 'react'
 import Loader from 'react-loader-spinner'
 import LinkIcon from '@material-ui/icons/Link';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 import olApi from '../olApi';
 
 import WebLink from './WebLink';
 import WebLinkList from './WebLinkList';
+import Book from './Book';
+import BookList from './BookList';
 
 import '../scss/dist/author.css';
 
 class AuthorDetail extends React.Component {
-  state = {author: {}, error: ''};
+  state = {author: {}, error: '', authorBookList: {}, bookLoading: false};
 
 
   componentDidMount() {
     olApi.get(`${this.props.match.params.key}/${this.props.match.params.id}.json`)
       .then((response) => {
-          this.setState({author: response.data});
-          console.log(response.data);
+          this.setState({author: response.data, bookLoading: true});
+          olApi.get('search.json', {
+            params: {author: response.data.name}
+          }).then((response) => {
+            this.setState({authorBookList: response.data.docs, bookLoading: false});
+          }).catch((error) => {
+            this.setState({error: 'Failed to load books list!', bookLoading: false});
+          });  
         }).catch((error) => {
           console.log(error);
           this.setState({error: 'Failed to load author data! Author unknown.'});
         });
+ 
   }
 
   render() {
@@ -31,6 +41,7 @@ class AuthorDetail extends React.Component {
     let birthDate = "";
     let bio = "";
     let webLinkList;
+    let authorBooks;
 
     if(this.state.error) {
       element = 
@@ -57,7 +68,17 @@ class AuthorDetail extends React.Component {
         <WebLink key={link.url} link={link.url} isLink={true}/>
       )) : webLinkList = <WebLink key="nokey" isLink={false}/>;
 
-    
+      if(this.state.bookLoading) {
+        authorBooks = 
+        <div className="d-flex justify-content-center mt-5">
+          <Loader type="ThreeDots" color="#ffb000" height={50} width={120}timeout={999999} />
+        </div>
+      } else {
+        const authorBooksList = this.state.authorBookList.map(book => (
+          <Book className="" key={book.key} book={book}/>
+        ));
+        authorBooks =  <BookList list={authorBooksList}></BookList>
+      }
 
       element = 
       <div className="row mt-3 authorDetails">
@@ -80,6 +101,12 @@ class AuthorDetail extends React.Component {
                 <LinkIcon/><h4 className="font-weight-bold ml-2 m-0">Links</h4>
               </section>
               <WebLinkList list={webLinkList}></WebLinkList>
+            </section>
+            <section className="mt-3 authorDetails_infoSectionSingle">
+              <section className="d-flex align-items-center mb-3">
+                <MenuBookIcon/><h4 className="font-weight-bold ml-2 m-0">Books</h4>
+              </section>
+              {authorBooks}
             </section>
           </div>
       </div>

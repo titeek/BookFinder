@@ -8,7 +8,7 @@ const Tag = (props) => {
   if(props.isTag) {
     element =  
     <span className="tag mr-2">
-      <Link to='' className="badge mb-1">{props.tag} </Link>
+      <Link to='' className="badge mb-2 text-wrap">{props.tag} </Link>
     </span>
   } else {
     element = <p>There is no tags </p>

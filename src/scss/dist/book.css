@@ -3,6 +3,7 @@
   border-radius: 16px;
   padding: 12px;
   margin: 12px;
+  background-color: #2d343c;
 }
 .book a {
   text-decoration: none;
@@ -14,16 +15,16 @@
   color: #ffc000;
 }
 .book_author {
-  color: #000;
+  color: #FFF;
 }
 .book_author:hover {
-  color: #22272b;
+  color: #ffc000;
 }
 .book_image:hover {
   box-shadow: 0 0 12px #000;
 }
 .book_text {
-  color: #000;
+  color: #FFF;
 }
 
 .bookDetails {
@@ -56,19 +57,21 @@
 
 .tag {
   background-color: #ffb000;
-  border-radius: 8px;
+  border-radius: 12px;
+  padding: 2px;
 }
 .tag:hover {
   background-color: #ffc000;
 }
 .tag a {
   color: #22272b;
+  word-wrap: break-word;
 }
 
 .links {
   color: #FFF;
   overflow-wrap: break-word;
-  word-wrap: break-word;
+  display: block;
 }
 .links:hover {
   color: #ffc000;

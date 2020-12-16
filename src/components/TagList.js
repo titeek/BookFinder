@@ -2,7 +2,7 @@ import React from 'react';
 
 function TagList(props) {
   return (
-    <div>
+    <div className="mr-1">
       {props.list}
     </div>
   );
