@@ -1,0 +1,83 @@
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  background-color: #e3e3e3;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.nav {
+  background-color: #22272b;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+.nav a {
+  color: red;
+}
+
+.finderCard {
+  background-color: #2d343c;
+  color: #FFF;
+  border-radius: 16px;
+}
+.finderCard_button {
+  background-color: #ffb000;
+  color: #22272b;
+  border-radius: 8px;
+}
+.finderCard_button:hover {
+  background-color: #ffc000;
+  color: #22272b;
+}
+.finderCard_button:focus {
+  background-color: #ffc000;
+  color: #22272b;
+}
+
+.finder {
+  background-color: #2d343c;
+  border-radius: 16px;
+}
+.finder input {
+  background-color: #e3e3e3;
+  color: #22272b;
+  border-radius: 8px;
+}
+.finder input:focus {
+  background-color: #e3e3e3;
+  color: #22272b;
+}
+.finder h5 {
+  color: #FFF;
+}
+.finder_button {
+  color: #ffb000;
+}
+.finder_button:hover {
+  color: #ffc000;
+}
+
+.navCards {
+  background-color: #2d343c;
+  color: #FFF;
+  border-radius: 16px;
+}
+.navCards_button {
+  background-color: #ffb000;
+  color: #22272b;
+  border-radius: 12px;
+}
+.navCards_button:hover {
+  background-color: #ffc000;
+  color: #22272b;
+}
+.navCards_button:focus {
+  background-color: #ffc000;
+  color: #22272b;
+}
+.navCards h6 {
+  color: #ffb000;
+}

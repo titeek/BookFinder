@@ -1,0 +1,114 @@
+//font
+$primaryFont: 'Poppins', sans-serif;
+$fontSize: 12px;
+
+//colors
+$primaryColor:#2d343c;
+$primaryColorDark: #22272b;
+$secondaryColor: #ffc000;
+$secondaryColorDark: #ffb000;
+$backgroundColor: #e3e3e3;
+$whiteColor: #FFF;
+
+body {
+  font-family: $primaryFont;
+  font-size: $fontSize;
+  background-color: $backgroundColor;
+}
+
+.btn {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.nav {
+  background-color: $primaryColorDark;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+
+  a {
+    color: red;
+  }
+}
+
+.finderCard {
+  background-color: $primaryColor;
+  color: $whiteColor;
+  border-radius: 16px;
+
+  &_button {
+    background-color: $secondaryColorDark;
+    color: $primaryColorDark;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: $secondaryColor;
+      color: $primaryColorDark;
+    }
+
+    &:focus {
+      background-color: $secondaryColor;
+      color: $primaryColorDark;
+    }
+    
+
+  }
+}
+
+.finder {
+  background-color: $primaryColor;
+  border-radius: 16px;
+
+  input {
+    background-color: $backgroundColor;
+    color: $primaryColorDark;
+    border-radius: 8px;
+
+    &:focus {
+      background-color: $backgroundColor;
+      color: $primaryColorDark;
+    }
+  }
+
+  h5 {
+    color: $whiteColor;
+  }
+
+  &_button {
+    color: $secondaryColorDark;
+    
+    &:hover {
+      color: $secondaryColor;
+    }
+  }
+}
+
+.navCards {
+  background-color: $primaryColor;
+  color: $whiteColor;
+  border-radius: 16px;
+
+  &_button {
+    background-color: $secondaryColorDark;
+    color: $primaryColorDark;
+    border-radius: 12px;
+    
+
+    &:hover {
+      background-color: $secondaryColor;
+      color: $primaryColorDark;
+    }
+
+    &:focus {
+      background-color: $secondaryColor;
+      color: $primaryColorDark;
+    }
+  }
+
+  h6 {
+    color: $secondaryColorDark;
+  }
+}
+
