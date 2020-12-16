@@ -19,8 +19,8 @@ class Index extends React.Component {
   
   
   onSearchFormSubmitByTitle = (term) => {
-    this.setState({bookLoading: true});
-
+    this.setState({bookLoading: true, error: ''});
+    
     olApi.get('search.json', {
       params: {title: term}
     }).then((response) => {
