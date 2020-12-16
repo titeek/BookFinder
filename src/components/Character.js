@@ -2,7 +2,7 @@ import React from 'react';
 
 const Character = (props) => {
   return(
-    <span>{props.character}, </span>
+    <span> <span className="textSecondaryColor font-weight-bold">|</span> {props.character} </span>
   );
 }
 

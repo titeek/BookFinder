@@ -67,7 +67,14 @@ class SearchByTitle extends React.Component {
         <Loader type="ThreeDots" color="#ffb000" height={50} width={120}timeout={999999} />
       </div>
     } else if(this.state.error) {
-      element = <div className="alert alert-danger">{this.state.error}</div>
+      element = <div class="alert alert-danger customAlert" role="alert">
+      <h4 class="alert-heading">Something goes wrong!</h4>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel corrupti necessitatibus cumque! Iste sint perspiciatis dolores quis doloremque quod. Possimus modi rerum debitis sed quaerat dolore delectus nesciunt quod iusto!</p>
+      <hr/>
+      <p class="m-0">Error message:</p>
+      <p class="mb-0 font-weight-bold">{this.state.error}</p>
+    </div>
+      
     } else if(this.state.bookList.length !== 0) {
       element = <div>
         <p className="d-flex justify-content-end">Number of results: {this.state.numberOfResults}</p>

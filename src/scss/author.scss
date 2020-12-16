@@ -1,0 +1,51 @@
+//font
+$primaryFont: 'Poppins', sans-serif;
+$fontSize: 12px;
+
+//colors
+$primaryColor:#2d343c;
+$primaryColorDark: #22272b;
+$secondaryColor: #ffc000;
+$secondaryColorDark: #ffb000;
+$backgroundColor: #e3e3e3;
+$whiteColor: #FFF;
+$blackColor: #000;
+
+.authorDetails {
+
+  border-radius: 16px;
+  background-color: $primaryColorDark;
+  padding: 16px;
+
+  img {
+    border-radius: 16px;
+  }
+
+  &_birthdateSection {
+    background-color: $primaryColor;
+    border-radius: 16px;
+    
+    padding: 12px;
+    color: $whiteColor;
+
+    a{
+      color: $whiteColor;
+      text-decoration: none;
+    }
+  }
+
+  &_infoSection {
+
+    &Single{
+      background-color: $primaryColor;
+      border-radius: 16px;
+      padding: 12px;
+      color: $whiteColor;
+
+      h2{
+        color: $secondaryColorDark;
+      }
+    }
+  }
+
+}

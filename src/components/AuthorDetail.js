@@ -1,10 +1,13 @@
 import React from 'react'
 import Loader from 'react-loader-spinner'
+import LinkIcon from '@material-ui/icons/Link';
 
 import olApi from '../olApi';
 
 import WebLink from './WebLink';
 import WebLinkList from './WebLinkList';
+
+import '../scss/dist/author.css';
 
 class AuthorDetail extends React.Component {
   state = {author: {}, error: ''};
@@ -30,7 +33,14 @@ class AuthorDetail extends React.Component {
     let webLinkList;
 
     if(this.state.error) {
-      element = <div className="alert alert-danger mt-3">{this.state.error}</div>;
+      element = 
+      <div class="mt-3 alert alert-danger customAlert" role="alert">
+        <h4 class="alert-heading">Something goes wrong!</h4>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel corrupti necessitatibus cumque! Iste sint perspiciatis dolores quis doloremque quod. Possimus modi rerum debitis sed quaerat dolore delectus nesciunt quod iusto!</p>
+        <hr/>
+        <p class="m-0">Error message:</p>
+        <p class="mb-0 font-weight-bold">{this.state.error}</p>
+      </div>
     } else if(!this.state.author.name) {
       element = 
       <div className="d-flex justify-content-center mt-5">
@@ -41,27 +51,36 @@ class AuthorDetail extends React.Component {
 
       bio = this.state.author.bio ? this.state.author.bio.value : "No more informations";
       birthDate = this.state.author.birth_date ? this.state.author.birth_date : "---"
+
       this.state.author.links ?
       webLinkList = this.state.author.links.slice(0, numberToSlice).map(link => (
-        <WebLink key={link.url} link={link.url}/>
-      )) : webLinkList = <WebLink key="nokey" link="There is no informations"/>;
+        <WebLink key={link.url} link={link.url} isLink={true}/>
+      )) : webLinkList = <WebLink key="nokey" isLink={false}/>;
 
     
 
       element = 
-      <div className="row mt-3">
-          <div className="col-4">
+      <div className="row mt-3 authorDetails">
+          <div className="col-sm-12 col-md-4 col-lg-3">
             <img src={photoString} alt="" className="img-fluid"/>
-            <h5>Birthdate</h5>
-            <p>{birthDate}</p>
-            <h5>Last modified</h5>
-            <p>{this.state.author.last_modified.value.slice(0, 10)}</p>
-            <h5>Links</h5>
-            <WebLinkList list={webLinkList}></WebLinkList>
+            <div className="mt-3 mb-3 authorDetails_birthdateSection">
+              <h5 className="font-weight-bold">Birthdate</h5>
+              <p>{birthDate}</p>
+              <h5 className="font-weight-bold">Last modified</h5>
+              <p className="m-0">{this.state.author.last_modified.value.slice(0, 10)}</p>
+            </div>
           </div>
-          <div className="col-8">
-            <h1>{this.state.author.name}</h1>
-            <p>{bio}</p>
+          <div className="col-sm-12 col-md-8 col-lg-9">
+            <section className="authorDetails_infoSectionSingle">
+              <h2 className="font-weight-bold">{this.state.author.name}</h2>
+              <p>{bio}</p>
+            </section>
+            <section className="mt-3 authorDetails_infoSectionSingle">
+              <section className="d-flex align-items-center mb-3">
+                <LinkIcon/><h4 className="font-weight-bold ml-2 m-0">Links</h4>
+              </section>
+              <WebLinkList list={webLinkList}></WebLinkList>
+            </section>
           </div>
       </div>
     }

@@ -1,0 +1,27 @@
+.authorDetails {
+  border-radius: 16px;
+  background-color: #22272b;
+  padding: 16px;
+}
+.authorDetails img {
+  border-radius: 16px;
+}
+.authorDetails_birthdateSection {
+  background-color: #2d343c;
+  border-radius: 16px;
+  padding: 12px;
+  color: #FFF;
+}
+.authorDetails_birthdateSection a {
+  color: #FFF;
+  text-decoration: none;
+}
+.authorDetails_infoSectionSingle {
+  background-color: #2d343c;
+  border-radius: 16px;
+  padding: 12px;
+  color: #FFF;
+}
+.authorDetails_infoSectionSingle h2 {
+  color: #ffb000;
+}

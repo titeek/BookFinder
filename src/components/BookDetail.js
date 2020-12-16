@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Loader from 'react-loader-spinner'
+import PeopleIcon from '@material-ui/icons/People';
+import PlaceIcon from '@material-ui/icons/Place';
+import LinkIcon from '@material-ui/icons/Link';
 
 import olApi from '../olApi';
 import Character from './Character';
@@ -12,9 +15,10 @@ import WebLinkList from './WebLinkList';
 import Tag from './Tag';
 import TagList from './TagList';
 
+import '../scss/dist/book.css';
 
 class BookDetail extends React.Component {
-  state = {book: {}, photo: 0, author: {}};
+  state = {book: {}, photo: 0, author: {}, error: ''};
 
   componentDidMount() {
     olApi.get(`${this.props.match.params.key}/${this.props.match.params.id}.json`)
@@ -25,7 +29,10 @@ class BookDetail extends React.Component {
         .then((response) => {
           this.setState({author: response.data});
         });
-    });
+      }).catch((error) => {
+        console.log(error);
+        this.setState({error: 'Failed to load book data! Book unknown.'});
+      });
   }
 
   render() {
@@ -40,13 +47,22 @@ class BookDetail extends React.Component {
     let descriptionString = "";
     let photoString = "";
 
-    if(!this.state.author.name) {
+    if(this.state.error) {
+      element = 
+      <div class="mt-3 alert alert-danger customAlert" role="alert">
+        <h4 class="alert-heading">Something goes wrong!</h4>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel corrupti necessitatibus cumque! Iste sint perspiciatis dolores quis doloremque quod. Possimus modi rerum debitis sed quaerat dolore delectus nesciunt quod iusto!</p>
+        <hr/>
+        <p class="m-0">Error message:</p>
+        <p class="mb-0 font-weight-bold">{this.state.error}</p>
+      </div>
+    } else if(!this.state.author.name) {
       element = 
       <div className="d-flex justify-content-center mt-5">
         <Loader type="ThreeDots" color="#ffb000" height={50} width={120}timeout={999999} />
       </div>
     } else {
-      photoString = this.state.book.covers ? this.state.book.covers[0] : ""
+      photoString = this.state.book.covers ? "http://covers.openlibrary.org/b/id/" + this.state.book.covers[0] + "-L.jpg" : "http://via.placeholder.com/300x400";
       
       this.state.book.subject_people ?
       characterList = this.state.book.subject_people.slice(0, numberToSlice).map(character => (
@@ -60,13 +76,13 @@ class BookDetail extends React.Component {
 
       this.state.book.links ?
       webLinkList = this.state.book.links.slice(0, numberToSlice).map(link => (
-        <WebLink key={link.url} link={link.url}/>
-      )) : webLinkList = <WebLink key="nokey" link="There is no informations"/>;
+        <WebLink key={link.url} link={link.url} isLink={true}/>
+      )) : webLinkList = <WebLink key="nokey" isLink={false}/>;
 
       this.state.book.subjects ?
       tagList = this.state.book.subjects.slice(0, numberOfTags).map(tag => (
-        <Tag key={tag} tag={tag}/>
-      )) : tagList = <Tag key="nokey" tag="There is no informations"/>;
+        <Tag key={tag} tag={tag} isTag={true}/>
+      )) : tagList = <Tag key="nokey" isTag={false}/>;
 
       if(this.state.book.description) {
         if(this.state.book.description.value){
@@ -84,27 +100,42 @@ class BookDetail extends React.Component {
         }
       } 
       element = 
-      <div className="row mt-3">
-          <div className="col-4">
-            <img src={`http://covers.openlibrary.org/b/id/${photoString}-L.jpg`} alt="" className="img-fluid"/>
-            <h5>Author</h5>
-            <Link to={`/author${this.state.book.authors[0].author.key}`}><p>{this.state.author.name}</p></Link>
-            <h5>Publish year</h5>
-            <p>{this.props.match.params.publishYear}</p>
-            <h5>Last modification</h5>
-            <p>{this.state.book.last_modified.value.slice(0,10)}</p>
-            <h5>Tags</h5>
-            <TagList list={tagList}></TagList>
+      <div className="row mt-3 bookDetails">
+          <div className="col-sm-12 col-md-4 col-lg-3">
+            <img src={photoString} alt="" className="img-fluid"/>
+            <div className="mt-3 mb-3 bookDetails_authorSection">
+              <Link to={`/author${this.state.book.authors[0].author.key}`}><h5 className="font-weight-bold">Author</h5><p>{this.state.author.name}</p></Link>
+              <h5 className="font-weight-bold">Publish year</h5>
+              <p>{this.props.match.params.publishYear}</p>
+              <h5 className="font-weight-bold">Last modification</h5>
+              <p>{this.state.book.last_modified.value.slice(0,10)}</p>
+              <h5 className="font-weight-bold">Tags</h5>
+              <TagList list={tagList}></TagList>
+            </div>
           </div>
-          <div className="col-8">
-            <h1>{this.state.book.title}</h1>
-            <p>{descriptionString}</p>
-            <h4>Characters</h4>
-            <CharacterList list={characterList}></CharacterList>
-            <h4>Places</h4>
-            <PlaceList list={placeList}></PlaceList>
-            <h4>Links</h4>
-            <WebLinkList list={webLinkList}></WebLinkList>
+          <div className="col-sm-12 col-md-8 col-lg-9 bookDetails_infoSection">
+            <section className="bookDetails_infoSectionSingle">
+              <h2 className="font-weight-bold">{this.state.book.title}</h2>
+              <p>{descriptionString}</p>
+            </section>
+            <section className="mt-3 bookDetails_infoSectionSingle">
+              <section className="d-flex align-items-center mb-3">
+                <PeopleIcon/><h4 className="font-weight-bold ml-2 m-0">Characters</h4>
+              </section>
+              <CharacterList list={characterList}></CharacterList>
+            </section>
+            <section className="mt-3 bookDetails_infoSectionSingle">
+              <section className="d-flex align-items-center mb-3">
+                <PlaceIcon/><h4 className="font-weight-bold ml-2 m-0">Places</h4>
+              </section>
+              <PlaceList list={placeList}></PlaceList>
+            </section>
+            <section className=" mt-3 bookDetails_infoSectionSingle">
+              <section className="d-flex align-items-center mb-3">
+                <LinkIcon/><h4 className="font-weight-bold ml-2 m-0">Links</h4>
+              </section>
+              <WebLinkList list={webLinkList}></WebLinkList>
+            </section>
           </div>
       </div>
     }

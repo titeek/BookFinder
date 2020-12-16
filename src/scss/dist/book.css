@@ -25,3 +25,52 @@
 .book_text {
   color: #000;
 }
+
+.bookDetails {
+  border-radius: 16px;
+  background-color: #22272b;
+  padding: 16px;
+}
+.bookDetails img {
+  border-radius: 16px;
+}
+.bookDetails_authorSection {
+  background-color: #2d343c;
+  border-radius: 16px;
+  padding: 12px;
+  color: #FFF;
+}
+.bookDetails_authorSection a {
+  color: #FFF;
+  text-decoration: none;
+}
+.bookDetails_infoSectionSingle {
+  background-color: #2d343c;
+  border-radius: 16px;
+  padding: 12px;
+  color: #FFF;
+}
+.bookDetails_infoSectionSingle h2 {
+  color: #ffb000;
+}
+
+.tag {
+  background-color: #ffb000;
+  border-radius: 8px;
+}
+.tag:hover {
+  background-color: #ffc000;
+}
+.tag a {
+  color: #22272b;
+}
+
+.links {
+  color: #FFF;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.links:hover {
+  color: #ffc000;
+  text-decoration: none;
+}

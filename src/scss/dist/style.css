@@ -81,3 +81,11 @@ body {
 .navCards h6 {
   color: #ffb000;
 }
+
+.textSecondaryColor {
+  color: #ffb000;
+}
+
+.customAlert {
+  border-radius: 16px;
+}

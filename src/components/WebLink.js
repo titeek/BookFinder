@@ -1,9 +1,18 @@
 import React from 'react';
+import '../scss/dist/book.css';
 
-const Link = (props) => {
+const WebLink = (props) => {
+  let element;
+  if(props.isLink) {
+    element =  <li><a className="links" href={props.link}>{props.link} </a></li>
+  } else {
+    element = <p><span className="textSecondaryColor font-weight-bold">|</span> There is no informations <span className="textSecondaryColor font-weight-bold">|</span></p>
+  }
   return(
-    <li>{props.link} </li>
+    <div>
+      {element}
+    </div>
   );
 }
 
-export default Link;
+export default WebLink;

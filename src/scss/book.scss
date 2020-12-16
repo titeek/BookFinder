@@ -11,8 +11,6 @@ $backgroundColor: #e3e3e3;
 $whiteColor: #FFF;
 $blackColor: #000;
 
-
-
 .book {
   
   border: 1px solid $primaryColor;
@@ -48,5 +46,69 @@ $blackColor: #000;
 
   &_text {
     color: $blackColor;
+  }
+}
+
+.bookDetails {
+
+  border-radius: 16px;
+  background-color: $primaryColorDark;
+  padding: 16px;
+
+  img {
+    border-radius: 16px;
+  }
+
+  &_authorSection {
+    background-color: $primaryColor;
+    border-radius: 16px;
+    
+    padding: 12px;
+    color: $whiteColor;
+
+    a{
+      color: $whiteColor;
+      text-decoration: none;
+    }
+  }
+
+  &_infoSection {
+
+    &Single{
+      background-color: $primaryColor;
+      border-radius: 16px;
+      padding: 12px;
+      color: $whiteColor;
+
+      h2{
+        color: $secondaryColorDark;
+      }
+    }
+  }
+
+}
+
+.tag {
+  background-color: $secondaryColorDark;
+  border-radius: 8px;
+
+  &:hover{
+    background-color: $secondaryColor;
+  }
+
+  a {
+    color: $primaryColorDark;
+  }
+}
+
+.links {
+  color: $whiteColor;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  &:hover{
+    color: $secondaryColor;
+    text-decoration: none;
   }
 }
