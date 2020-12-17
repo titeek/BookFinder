@@ -1,0 +1,21 @@
+//font
+$primaryFont: 'Poppins', sans-serif;
+$fontSize: 12px;
+
+//colors
+$primaryColor:#2d343c;
+$primaryColorDark: #22272b;
+$secondaryColor: #ffc000;
+$secondaryColorDark: #ffb000;
+$backgroundColor: #e3e3e3;
+$whiteColor: #FFF;
+
+.tagDetails {
+  border-radius: 16px;
+  background-color: $primaryColorDark;
+  padding-bottom: 12px;
+  
+  h1 {
+    color: $secondaryColorDark
+  }
+}

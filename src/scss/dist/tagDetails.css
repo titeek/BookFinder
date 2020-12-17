@@ -1,0 +1,8 @@
+.tagDetails {
+  border-radius: 16px;
+  background-color: #22272b;
+  padding-bottom: 12px;
+}
+.tagDetails h1 {
+  color: #ffb000;
+}

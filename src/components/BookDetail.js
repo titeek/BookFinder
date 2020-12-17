@@ -97,7 +97,9 @@ class BookDetail extends React.Component {
             descriptionString = this.state.book.description;
           }
         }
-      } 
+      } else {
+        descriptionString = "There is no more informations";
+      }
       element = 
       <div className="row mt-3 bookDetails">
           <div className="col-sm-12 col-md-4 col-lg-3">

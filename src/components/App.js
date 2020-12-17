@@ -9,6 +9,7 @@ import BookDetail from './BookDetail';
 import Index from './Index';
 import AuthorDetail from './AuthorDetail';
 import Footer from './Footer';
+import TagDetails from './TagDetails';
 
 class App extends React.Component {
 
@@ -25,6 +26,7 @@ class App extends React.Component {
             <Route path="/contact" exact component={Contact} />
             <Route path="/book/:key/:id/:publishYear" exact component={BookDetail}/>
             <Route path="/author/:key/:id" component={AuthorDetail}/>
+            <Route path="/subject/:id" component={TagDetails}/>
           </Switch>
         </div>
         <Footer/>
