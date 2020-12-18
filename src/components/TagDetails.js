@@ -2,7 +2,7 @@ import React from 'react';
 import Loader from 'react-loader-spinner';
 
 import olApi from '../olApi';
-import Book from './Book';
+import BookFromTag from './BookFromTag';
 import BookList from './BookList';
 
 import '../scss/dist/tagDetails.css';
@@ -14,7 +14,6 @@ class TagDetails extends React.Component {
     olApi.get(`subjects/${this.props.match.params.id}.json`)
     .then((response) => {
       this.setState({bookList: response.data.works, bookLoading: false});
-      console.log(response.data.works);
       }).catch((error) => {
         console.log(error);
         this.setState({error: 'Failed to load books list! Tag unknown.'});
@@ -41,7 +40,7 @@ class TagDetails extends React.Component {
       </div>
     } else {
       const bookList = this.state.bookList.map(book => (
-        <Book key={book.key} book={book}/>
+        <BookFromTag key={book.key} book={book}/>
       ));
 
       titleTag = this.props.match.params.id.charAt(0).toUpperCase() + this.props.match.params.id.slice(1);
