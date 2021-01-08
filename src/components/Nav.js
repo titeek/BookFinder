@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import 'bootstrap';
 
-function Nav() {
+const Nav = () => {
   return(
     <nav className="navbar navbar-expand-lg navbar-dark nav">
       <div className="container">

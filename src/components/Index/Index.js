@@ -1,18 +1,23 @@
 import React from 'react';
-import Loader from 'react-loader-spinner'
+import {compose} from 'redux';
 
-import olApi from '../olApi';
-import SearchFormByTitle from './SearchFormByTitle'
-import SearchFormByAuthor from './SearchFormByAuthor';
-import BookList from './BookList'
-import Book from './Book';
+import olApi from '../../olApi';
+import SearchFormByTitle from '../SearchFormByTitle'
+import SearchFormByAuthor from '../SearchFormByAuthor';
+import BookList from '../Book/BookList'
+import BooksFilterContainer from '../BooksFilter/BooksFilterContainer';
 
-import '../scss/dist/style.css';
+import '../../scss/dist/style.css';
+import {withHandleError, withLoading} from '../hoc';
+
+//Dodaje hoc
+const BookListWithHandleErrorAndLoading = compose(withHandleError, withLoading)(BookList);
 
 class Index extends React.Component {
   constructor() {
     super();
-    this.state = {bookList: [], bookLoading: false, error: '', numberOfResults: 0, searchByTitleState: true, searchFailed: false};
+    //stad wyleciało booklist bookloading i error dla reduxa
+    this.state = {bookLoading: false, error: '', numberOfResults: 0, searchByTitleState: true, searchFailed: false};
     this.searchByTitle = this.searchByTitle.bind(this);
     this.searchByAuthor = this.searchByAuthor.bind(this);
   }
@@ -24,7 +29,9 @@ class Index extends React.Component {
     olApi.get('search.json', {
       params: {title: term}
     }).then((response) => {
-      this.setState({bookList: response.data.docs, bookLoading: false, numberOfResults: response.data.numFound});
+      this.setState({bookLoading: false, numberOfResults: response.data.numFound});
+      //book loading state stad wyleciał
+      this.props.booksFetched(response.data.docs);
       if(response.data.numFound === 0) {
         this.setState({searchFailed: true});
       }
@@ -54,33 +61,19 @@ class Index extends React.Component {
   }
 
   render() {
-    const list = this.state.bookList.map(book => (
-      <Book key={book.key} book={book}/>
-    ));
+    let bookElement = <BookList list={this.props.books}></BookList>
 
     let finder = <SearchFormByTitle onFormSubmit={this.onSearchFormSubmitByTitle}></SearchFormByTitle>;
     if(!this.state.searchByTitleState) {
       finder = <SearchFormByAuthor onFormSubmit={this.onSearchFormSubmitByAuthor}></SearchFormByAuthor>;
     } 
 
-    let element = <div></div>;
-    if(this.state.bookLoading) {
-      element = 
-      <div className="d-flex justify-content-center mt-5">
-        <Loader type="ThreeDots" color="#ffb000" height={50} width={120}timeout={999999} />
-      </div>
-    } else if(this.state.error) {
-      element = <div className="alert alert-danger customAlert" role="alert">
-      <h4 className="alert-heading">Something goes wrong!</h4>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel corrupti necessitatibus cumque! Iste sint perspiciatis dolores quis doloremque quod. Possimus modi rerum debitis sed quaerat dolore delectus nesciunt quod iusto!</p>
-      <hr/>
-      <p className="m-0">Error message:</p>
-      <p className="mb-0 font-weight-bold">{this.state.error}</p>
-    </div>
-    } else if(this.state.bookList.length !== 0) {
+    let element = <BookListWithHandleErrorAndLoading list={this.props.books} error={this.state.error} isLoading={this.state.bookLoading}/>;
+
+    if(this.props.books.length !== 0) {
       element = <div>
         <p className="d-flex justify-content-end">Number of results: {this.state.numberOfResults}</p>
-        <BookList list={list}></BookList>
+        {bookElement}
       </div>
     } else if(this.state.searchFailed){
       element = 
@@ -112,6 +105,7 @@ class Index extends React.Component {
               <div className="mt-3 pb-0 alert alert-secondary finder">
                 {finder}
               </div>
+              <BooksFilterContainer/>
               {element}
             </div>
           </div>

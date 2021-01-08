@@ -1,5 +1,4 @@
 import React from 'react';
-import { Icon } from '@material-ui/core';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import EmailIcon from '@material-ui/icons/Email';
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -8,7 +7,7 @@ import PlaceIcon from '@material-ui/icons/Place';
 import PhoneIcon from '@material-ui/icons/Phone';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
-function Contact() {
+const Contact = () => {
   return (
     <div className="container mt-3">         
       <div className="row">

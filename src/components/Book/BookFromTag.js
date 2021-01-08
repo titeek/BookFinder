@@ -1,12 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import '../scss/dist/book.css';
+import '../../scss/dist/book.css';
 
-const BookFromTag = ({author="Brak autora", book}) => {
+const BookFromTag = ({book}) => {
 
   let photoString = book.cover_id ? "http://covers.openlibrary.org/b/id/" + book.cover_id + "-M.jpg" : "http://via.placeholder.com/300x400";
-
 
   let editionCount = book.edition_count ? book.edition_count : "Unknown";
   let publishYear = book.first_publish_year ? book.first_publish_year : "Unknown";

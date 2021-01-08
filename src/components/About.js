@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-function About() {
+const About = () => {
   return (
     <div className="container mt-3">         
       <div className="row">

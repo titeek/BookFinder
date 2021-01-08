@@ -1,16 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import Language from './Language';
-import LanguageList from './LanguageList';
+import LanguageList from '../Languagee/LanguageList';
 
-import '../scss/dist/book.css';
+import '../../scss/dist/book.css';
 
-const Book = ({author="Brak autora", book}) => {
+const Book = ({book}) => {
 
-  let langList;
+  let langElement;
   let photoString = book.cover_i > 0 ? "http://covers.openlibrary.org/b/id/" + book.cover_i + "-M.jpg" : "http://via.placeholder.com/300x400";
-
 
   let publishYear = book.publish_year ? Math.min.apply(null, book.publish_year) : "Unknown";
   let authorString = book.author_name ? book.author_name : "Unknown";
@@ -21,11 +19,9 @@ const Book = ({author="Brak autora", book}) => {
   }
 
   book.language ?
-    langList = book.language.slice(0, 100).map(lang => (
-      <Language key={lang} lang={lang}/>
-    )) : langList = <Language key="nokey" lang="There is no informations"/>;
+    langElement = <LanguageList list={book.language}></LanguageList>
+    : langElement = <p>There is no informations</p>
 
-  
   return (
     <div className="row mb-4 book">
       <div className="col-md-5 col-lg-3">
@@ -36,7 +32,7 @@ const Book = ({author="Brak autora", book}) => {
         <Link to={`/author/authors/${authorId}`}><p className="p-0 m-0 book_author"><span className="font-weight-bold">Author:</span> {authorString}</p></Link>
         <p className="p-0 m-0 book_text"><span className="font-weight-bold">Publish year:</span> {publishYear}</p>
         <span className="p-0 book_text"><p className="font-weight-bold m-0">Avaiable language(s):</p>
-        <LanguageList list={langList}></LanguageList>
+        {langElement}
         </span>
       </div>
     </div>
