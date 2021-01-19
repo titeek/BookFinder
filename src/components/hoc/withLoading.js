@@ -5,7 +5,7 @@ const withLoading = Comp => {
   return class extends React.Component {
     
     render() {
-      const {isLoading, ...restProps} = this.props; 
+      const {isLoading} = this.props; 
 
       if(isLoading) {
         return <CustomLoader/>
