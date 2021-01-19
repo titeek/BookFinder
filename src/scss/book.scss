@@ -95,6 +95,10 @@ $blackColor: #000;
   border-radius: 12px;
   padding: 2px;
 
+  &_single {
+    word-wrap: break-word;
+  }
+
   &:hover{
     background-color: $secondaryColor;
   }

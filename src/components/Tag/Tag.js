@@ -8,7 +8,7 @@ const Tag = (props) => {
   
   let element =  
   <span className="tag mr-2">
-    <Link to={`/subject/${tagLower}`} className="badge mb-2 text-wrap">{props.tag} </Link>
+    <Link to={`/subject/${tagLower}`} className="badge mb-2 tag_single">{props.tag} </Link>
   </span>
   
   return(

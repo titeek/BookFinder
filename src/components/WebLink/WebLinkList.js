@@ -8,9 +8,9 @@ function WebLinkList(props) {
     <WebLink key={link.url} link={link.url}/>));
 
   return (
-    <div>
+    <ul>
       {webLinkElement}
-    </div>
+    </ul>
   );
 }
 
