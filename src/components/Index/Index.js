@@ -16,7 +16,7 @@ const BookListWithHandleErrorAndLoading = compose(withHandleError, withLoading)(
 class Index extends React.Component {
   constructor() {
     super();
-    this.state = {bookLoading: false, error: '', numberOfResults: 0, searchByTitleState: true, searchFailed: false};
+    this.state = {bookLoading: false, error: '', searchByTitleState: true, searchFailed: false};
     this.searchByTitle = this.searchByTitle.bind(this);
     this.searchByAuthor = this.searchByAuthor.bind(this);
   }
@@ -29,8 +29,9 @@ class Index extends React.Component {
     olApi.get('search.json', {
       params: {title: term}
     }).then((response) => {
-      this.setState({bookLoading: false, numberOfResults: response.data.numFound});
+      this.setState({bookLoading: false});
       this.props.booksFetched(response.data.docs);
+      this.props.numberOfResultsFetched(response.data.numFound);
       if(response.data.numFound === 0) {
         this.setState({searchFailed: true});
       }
@@ -47,7 +48,8 @@ class Index extends React.Component {
       params: {author: term}
     }).then((response) => {
       this.props.booksFetched(response.data.docs);
-      this.setState({bookLoading: false, numberOfResults: response.data.numFound});
+      this.props.numberOfResultsFetched(response.data.numFound);
+      this.setState({bookLoading: false});
     }).catch((error) => {
       this.setState({error: 'Failed to load books list!', bookLoading: false});
     });
@@ -74,7 +76,7 @@ class Index extends React.Component {
 
     if(this.props.books.length !== 0) {
       element = <div>
-        <p className="d-flex justify-content-end">Number of results: {this.state.numberOfResults}</p>
+        <p className="d-flex justify-content-end">Number of results: {this.props.numberOfResults}</p>
         {bookElement}
       </div>
     } else if(this.state.searchFailed){
