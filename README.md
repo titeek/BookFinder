@@ -1,6 +1,6 @@
 # Book Finder
 
-React App using Bootstrap, scss and Open Library API.\ 
+React App using Bootstrap, scss and Open Library API.
 The user has possibility to find book and received informations both about it and the author.
 
 
