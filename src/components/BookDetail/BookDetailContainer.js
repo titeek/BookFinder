@@ -12,8 +12,13 @@ const BookDetailContainer = (props) => {
   const[book, setBook] = useState({});
   const[author, setAuthor] = useState({});
   const[error, setError] = useState('');
+  const[publishYear, setPublishYear] = useState('');
 
   useEffect(() => { //componentDidMount
+    if(props.location.state) {
+      setPublishYear(props.location.state.publishYear);
+    } else setPublishYear("---");
+
     olApi.get(`${props.match.params.key}/${props.match.params.id}.json`)
     .then((response) => {
       setBook(response.data);
@@ -28,10 +33,10 @@ const BookDetailContainer = (props) => {
     return() => { //componentDidUnMount
       console.log("end");
     };
-  }, [props.match.params.key, props.match.params.id]);
+  }, [props.match.params.key, props.match.params.id, props.location.state]);
 
   return(
-    <BookDetailWithHandleErrorAndLoading book={book} author={author} error={error} publishYear={props.location.state.publishYear} isLoading={!author.name}/>
+    <BookDetailWithHandleErrorAndLoading book={book} author={author} error={error} publishYear={publishYear} isLoading={!author.name}/>
   );
   
 }

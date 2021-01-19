@@ -43,13 +43,17 @@ const BookDetail = (props) => {
     if(props.book.description.value){
         if(props.book.description.value.includes('([source]')){
           descriptionString = props.book.description.value.substring(0, props.book.description.value.indexOf('([source]'));
+      } else if (props.book.description.value.includes('---')){
+          descriptionString = props.book.description.value.substring(0, props.book.description.value.indexOf('---'));
       } else {
           descriptionString = props.book.description.value;
         }
       } else {
         if(props.book.description.includes('([source]')){
-        descriptionString = props.book.description.substring(0, props.book.description.indexOf('([source]'));
-        } else {
+          descriptionString = props.book.description.substring(0, props.book.description.indexOf('([source]'));
+        } else if(props.book.description.includes('---')){
+          descriptionString = props.book.description.substring(0, props.book.description.indexOf('---'));
+        }else {
           descriptionString = props.book.description;
       }
     }
