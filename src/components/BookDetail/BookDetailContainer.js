@@ -31,7 +31,7 @@ const BookDetailContainer = (props) => {
   }, [props.match.params.key, props.match.params.id]);
 
   return(
-    <BookDetailWithHandleErrorAndLoading book={book} author={author} error={error} publishYear={props.match.params.publishYear} isLoading={!author.name}/>
+    <BookDetailWithHandleErrorAndLoading book={book} author={author} error={error} publishYear={props.location.state.publishYear} isLoading={!author.name}/>
   );
   
 }

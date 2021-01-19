@@ -23,7 +23,7 @@ class App extends React.Component {
             <Route path="/" exact component={IndexContainer} />
             <Route path="/about" exact component={About} />
             <Route path="/contact" exact component={Contact} />
-            <Route path="/book/:key/:id/:publishYear" exact component={BookDetailContainer}/>
+            <Route path="/book/:key/:id" exact component={BookDetailContainer}/>
             <Route path="/author/:key/:id" exact component={AuthorDetailsContainer}/>
             <Route path="/subject/:id" exact component={TagDetailsContainer}/>
           </Switch>
