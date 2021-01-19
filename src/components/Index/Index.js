@@ -16,7 +16,6 @@ const BookListWithHandleErrorAndLoading = compose(withHandleError, withLoading)(
 class Index extends React.Component {
   constructor() {
     super();
-    //stad wyleciało booklist bookloading i error dla reduxa
     this.state = {bookLoading: false, error: '', numberOfResults: 0, searchByTitleState: true, searchFailed: false};
     this.searchByTitle = this.searchByTitle.bind(this);
     this.searchByAuthor = this.searchByAuthor.bind(this);
@@ -25,12 +24,12 @@ class Index extends React.Component {
   
   onSearchFormSubmitByTitle = (term) => {
     this.setState({bookLoading: true, error: ''});
+    this.props.booksFetched([]);
     
     olApi.get('search.json', {
       params: {title: term}
     }).then((response) => {
       this.setState({bookLoading: false, numberOfResults: response.data.numFound});
-      //book loading state stad wyleciał
       this.props.booksFetched(response.data.docs);
       if(response.data.numFound === 0) {
         this.setState({searchFailed: true});
@@ -42,11 +41,13 @@ class Index extends React.Component {
 
   onSearchFormSubmitByAuthor = (term) => {
     this.setState({bookLoading: true});
-
+    this.props.booksFetched([]);
+    
     olApi.get('search.json', {
       params: {author: term}
     }).then((response) => {
-      this.setState({bookList: response.data.docs, bookLoading: false, numberOfResults: response.data.numFound});
+      this.props.booksFetched(response.data.docs);
+      this.setState({bookLoading: false, numberOfResults: response.data.numFound});
     }).catch((error) => {
       this.setState({error: 'Failed to load books list!', bookLoading: false});
     });
@@ -61,6 +62,7 @@ class Index extends React.Component {
   }
 
   render() {
+    
     let bookElement = <BookList list={this.props.books}></BookList>
 
     let finder = <SearchFormByTitle onFormSubmit={this.onSearchFormSubmitByTitle}></SearchFormByTitle>;

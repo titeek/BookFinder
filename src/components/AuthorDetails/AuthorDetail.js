@@ -1,11 +1,16 @@
 import React from 'react'
-import Loader from 'react-loader-spinner'
+import {compose} from 'redux';
 import LinkIcon from '@material-ui/icons/Link';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 import WebLinkList from '../WebLink/WebLinkList';
+import BookList from '../Book/BookList';
 
 import '../../scss/dist/author.css';
+
+import {withLoading} from '../hoc';
+
+const BookListAndLoading = compose(withLoading)(BookList);
 
 const AuthorDetail = (props) => {
   
@@ -15,7 +20,7 @@ const AuthorDetail = (props) => {
   let bio = "";
   let webLinkElement;
   let authorBooksElement;
-   
+  
   photoString = props.author.photos ? "http://covers.openlibrary.org/b/id/" + props.author.photos[0] + "-L.jpg" : "http://via.placeholder.com/300x400";
 
   bio = props.author.bio ? props.author.bio.value : "No more informations";
@@ -25,15 +30,7 @@ const AuthorDetail = (props) => {
     webLinkElement = <WebLinkList list={props.author.links}></WebLinkList>
     : webLinkElement = <p>There is no informations</p>
 
-  if(props.loading) {
-    authorBooksElement = 
-    <div className="d-flex justify-content-center mt-5">
-      <Loader type="ThreeDots" color="#ffb000" height={50} width={120}timeout={999999} />
-    </div>
-  } else {
-    authorBooksElement = <p>pobrało sie, sprawdzić czemu to nie działa</p>
-      //authorBooksElement = <BookList list={props.authorBookList}></BookList>
-  }
+  authorBooksElement = <BookListAndLoading list={props.authorBookList} isLoading={props.loading}> </BookListAndLoading>
 
   element = 
   <div className="row mt-3 authorDetails">

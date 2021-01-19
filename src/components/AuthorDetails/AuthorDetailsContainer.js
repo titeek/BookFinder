@@ -14,11 +14,11 @@ const AuthorDetailContainer = (props) => {
   const[authorBookList, setAuthorBookList] = useState({});
   const[bookLoading, setBookLoading] = useState();
 
-  useEffect(() => { //componentDidMount
+  useEffect(() => {
+    setBookLoading(true); //componentDidMount
     olApi.get(`${props.match.params.key}/${props.match.params.id}.json`)
       .then((response) => {
         setAuthor(response.data);
-        setBookLoading(true);
         olApi.get('search.json', {
           params: {author: response.data.name}
         }).then((response) => {
